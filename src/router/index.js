@@ -8,7 +8,14 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 
 const routes = [
-
+  {
+    path: '/reg',
+    component: () => import('@/views/register')
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login')
+  }
 ]
 
 const router = new VueRouter({

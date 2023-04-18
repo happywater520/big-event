@@ -1,13 +1,12 @@
 
 <template>
-  <div>
-    <el-button>默认按钮</el-button>
-  </div>
+    <router-view></router-view>
 </template>
 
 <script>
 import { getListAPI } from '@/api'
 export default {
+  name: 'App',
   created () {
     this.getListFn()
   },
