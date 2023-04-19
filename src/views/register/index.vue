@@ -21,7 +21,7 @@
     <el-input v-model="regForm.repassword" type="password" placeholder="请再次确认密码"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" class="btn-reg">注册</el-button>
+    <el-button type="primary" class="btn-reg" @click="regNewUserFn">注册</el-button>
     <el-link type="info">去登录</el-link>
   </el-form-item>
 </el-form>
@@ -74,7 +74,29 @@ export default {
         ]
       }
     }
+  },
+  methods: {
+    // 注册新用户
+    regNewUserFn () {
+    // 进行表单预验证
+      this.$refs.regRef.validate(async valid => {
+        if (!valid) return false
+        // 尝试拿到用户输入的内容
+        // console.log(this.regForm)
+        // 1. 调用注册接口
+        // eslint-disable-next-line no-undef
+        const { data: res } = await registerAPI(this.regForm)
+        console.log(res)
+        // 2. 注册失败，提示用户
+        if (res.code !== 0) return this.$message.error(res.message)
+        // 3. 注册成功，提示用户
+        this.$message.success(res.message)
+        // 4. 跳转到登录页面
+        this.$router.push('/login')
+      })
+    }
   }
+
 }
 </script>
 
